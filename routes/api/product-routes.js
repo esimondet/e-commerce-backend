@@ -15,7 +15,17 @@ router.get('/', (req, res) => {
         model: Tag,
       },
     ],
-  });
+  })
+    .then((dbProductData) => {
+      const product = dbProductData.map((product) =>
+        product.get({ plain: true })
+      );
+      res.json({ data: product });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
 });
 
 // get one product
