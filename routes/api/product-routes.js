@@ -27,7 +27,6 @@ router.get('/', (req, res) => {
 
 // get one product
 router.get('/:id', (req, res) => {
-  console.log(req.params.id);
   Product.findOne({
     where: { id: req.params.id },
     include: [
@@ -124,6 +123,19 @@ router.put('/:id', (req, res) => {
 
 router.delete('/:id', (req, res) => {
   // delete one product by its `id` value
+  Product.destroy({
+    where: { id: req.params.id },
+  })
+    .then(() => {
+      console.log(
+        `Product with ID: ${req.params.id} was successfully deleted!`
+      );
+      res.json(`Product with ID: ${req.params.id} was successfully deleted!`);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
 });
 
 module.exports = router;
