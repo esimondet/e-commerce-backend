@@ -51,10 +51,10 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) => {
   /* req.body should look like this...
     {
-      product_name: "Basketball",
-      price: 200.00,
-      stock: 3,
-      tagIds: [1, 2, 3, 4]
+      "product_name": "Ameri-beans",
+      "price": 20.00,
+      "stock": 3,
+      "tagIds": [3, 4, 6]
     }
   */
   Product.create(req.body)
@@ -114,7 +114,7 @@ router.put('/:id', (req, res) => {
         ProductTag.bulkCreate(newProductTags),
       ]);
     })
-    .then((updatedProductTags) => res.json(updatedProductTags))
+    .then(() => res.json(`Product was successfully updated!`))
     .catch((err) => {
       // console.log(err);
       res.status(400).json(err);

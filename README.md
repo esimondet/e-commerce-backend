@@ -14,7 +14,7 @@ This project uses mysql2 to store and manage data, as well as sequelize ORM to f
 </br>
 Clone the repository and run <code> npm start </code> on a terminal from the root. Watch the video walkthrough for additional instruction.</p>
 
-[Video Walkthrough]()
+[Video Walkthrough](https://youtu.be/vNuWC_ln7ss)
 
 ## Usage
 
