@@ -1,11 +1,11 @@
 const router = require('express').Router();
 const { Product, Category, Tag, ProductTag } = require('../../models');
+const { sequelize } = require('../../models/Product');
 
 // The `/api/products` endpoint
 
 // get all products
 router.get('/', (req, res) => {
-  // find all products
   Product.findAll({
     include: [
       {
@@ -17,10 +17,7 @@ router.get('/', (req, res) => {
     ],
   })
     .then((dbProductData) => {
-      const product = dbProductData.map((product) =>
-        product.get({ plain: true })
-      );
-      res.json({ data: product });
+      res.json({ data: dbProductData });
     })
     .catch((err) => {
       console.log(err);
@@ -30,8 +27,25 @@ router.get('/', (req, res) => {
 
 // get one product
 router.get('/:id', (req, res) => {
-  // find a single product by its `id`
-  // be sure to include its associated Category and Tag data
+  console.log(req.params.id);
+  Product.findOne({
+    where: { id: req.params.id },
+    include: [
+      {
+        model: Category,
+      },
+      {
+        model: Tag,
+      },
+    ],
+  })
+    .then((dbProductData) => {
+      res.json({ data: dbProductData });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
 });
 
 // create new product
