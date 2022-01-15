@@ -65,7 +65,7 @@ router.put('/:id', (req, res) => {
       id: req.params.id,
     },
   })
-    .then((updatedTag) => res.json(updatedTag))
+    .then(() => res.json(`Tag was successfully updated!`))
     .catch((err) => {
       // console.log(err);
       res.status(400).json(err);
@@ -78,10 +78,8 @@ router.delete('/:id', (req, res) => {
     where: { id: req.params.id },
   })
     .then(() => {
-      console.log(
-        `Product with ID: ${req.params.id} was successfully deleted!`
-      );
-      res.json(`Product with ID: ${req.params.id} was successfully deleted!`);
+      console.log(`Tag with ID: ${req.params.id} was successfully deleted!`);
+      res.json(`Tag with ID: ${req.params.id} was successfully deleted!`);
     })
     .catch((err) => {
       console.log(err);
